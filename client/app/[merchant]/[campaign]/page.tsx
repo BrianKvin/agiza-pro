@@ -67,14 +67,12 @@ export async function generateMetadata({
       description,
       images: [heroImage],
     },
-    // WhatsApp/Social Media meta tags
-    other: {
-      'og:image': heroImage,
-      'og:image:width': '1200',
-      'og:image:height': '630',
-      'og:image:alt': title,
-      ...(priceRange && { 'product:price:amount': priceRange }),
-    },
+    // Additional meta tags (non-standard OG tags)
+    ...(priceRange && {
+      other: {
+        'product:price:amount': priceRange,
+      },
+    }),
   };
 }
 
