@@ -1,14 +1,18 @@
+import os
 from pydantic_settings import BaseSettings
 from typing import List
 
 class Settings(BaseSettings):
     # Server Configuration
-    host: str = "0.0.0.0"
-    port: int = 8000
-    reload: bool = True
+    host: str = os.getenv("HOST", "0.0.0.0")
+    port: int = int(os.getenv("PORT", 8000))  # Render sets PORT dynamically
+    reload: bool = os.getenv("RELOAD", "False").lower() == "true"
     
     # CORS Configuration
-    cors_origins: str = "http://localhost:3000,https://yourdomain.vercel.app"
+    cors_origins: List[str] = [
+        "http://localhost:3000",
+        "https://yourdomain.vercel.app"
+    ]
     
     # API Configuration
     api_title: str = "AgizaPro Campaign API"
@@ -18,10 +22,6 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         case_sensitive = False
-    
-    def get_cors_origins(self) -> List[str]:
-        """Parse comma-separated CORS origins string into a list"""
-        return [origin.strip() for origin in self.cors_origins.split(",")]
 
 
 settings = Settings()
