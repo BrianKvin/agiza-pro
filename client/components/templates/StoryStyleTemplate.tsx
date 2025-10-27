@@ -11,7 +11,7 @@ interface StoryStyleTemplateProps {
 }
 
 export default function StoryStyleTemplate({ campaign }: StoryStyleTemplateProps) {
-  const { merchant, products, primary_color, background_color } = campaign;
+  const { merchant, products, primary_color, background_color, text_color } = campaign;
   const [selectedProduct, setSelectedProduct] = useState(0);
   
   return (
@@ -22,14 +22,14 @@ export default function StoryStyleTemplate({ campaign }: StoryStyleTemplateProps
       }}
     >
       {/* Story-Style Product Swiper */}
-      <div className="sticky top-0 z-10 bg-white border-b">
+      <div className="bg-white border-b">
         <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
           {products.map((product, index) => (
             <div 
               key={product.id}
               className="flex-shrink-0 w-full snap-center"
             >
-              <div className="relative w-full h-[80vh]">
+              <div className="relative w-full h-[70vh]">
                 {(product.image || product.image_url) && (
                   <Image
                     src={product.image || product.image_url || ''}
@@ -67,7 +67,7 @@ export default function StoryStyleTemplate({ campaign }: StoryStyleTemplateProps
         </div>
         
         {/* Product Indicators */}
-        <div className="flex justify-center gap-2 p-4">
+        <div className="flex justify-center gap-2 p-4 bg-white">
           {products.map((_, index) => (
             <button
               key={index}
@@ -86,12 +86,12 @@ export default function StoryStyleTemplate({ campaign }: StoryStyleTemplateProps
       </div>
 
       {/* Campaign Info */}
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
-        <h1 className="text-4xl font-bold mb-4 text-center">{campaign.title}</h1>
-        <p className="text-xl text-center mb-8 opacity-80">{campaign.description}</p>
+      <div className="container mx-auto px-4 py-12 max-w-6xl" style={{ color: text_color || '#000000' }}>
+        <h1 className="text-4xl font-bold mb-4 text-center" style={{ color: text_color || '#000000' }}>{campaign.title}</h1>
+        <p className="text-xl text-center mb-8" style={{ opacity: 0.85 }}>{campaign.description}</p>
 
         {/* Merchant Info */}
-        <div className="flex items-center justify-center gap-4 mb-8 pb-8 border-b">
+        <div className="flex items-center justify-center gap-4 mb-8 pb-8 border-gray-300 border-b">
           {merchant.logo_url && (
             <Image
               src={merchant.logo_url}
@@ -102,9 +102,9 @@ export default function StoryStyleTemplate({ campaign }: StoryStyleTemplateProps
             />
           )}
           <div className="text-center">
-            <h3 className="font-semibold">{merchant.name}</h3>
+            <h3 className="font-semibold" style={{ color: text_color || '#000000' }}>{merchant.name}</h3>
             {merchant.location && (
-              <p className="text-sm opacity-70">{merchant.location}</p>
+              <p className="text-sm" style={{ opacity: 0.8, color: text_color || '#000000' }}>{merchant.location}</p>
             )}
           </div>
         </div>
