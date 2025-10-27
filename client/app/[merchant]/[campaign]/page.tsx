@@ -39,7 +39,9 @@ export async function generateMetadata({
   const title = campaignData.title;
   const description = campaignData.description;
   const heroImage = campaignData.hero_image || '';
-  const url = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.vercel.app'}/${merchant}/${campaign}`;
+  // Trim any whitespace/newlines from environment variable
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.vercel.app').trim();
+  const url = `${siteUrl}/${merchant}/${campaign}`;
 
   return {
     title,

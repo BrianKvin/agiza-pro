@@ -6,7 +6,7 @@ interface ShareButtonsProps {
 }
 
 export default function ShareButtons({ merchant, campaign }: ShareButtonsProps) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').trim();
   const url = `${siteUrl}/${merchant}/${campaign}`;
   const title = 'Check out this campaign on AgizaPro!';
 
