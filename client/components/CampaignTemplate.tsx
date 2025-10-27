@@ -8,7 +8,6 @@ interface CampaignTemplateProps {
 }
 
 export default function CampaignTemplate({ campaign }: CampaignTemplateProps) {
-  // Switch based on template_type
   const template = campaign.template_type?.toLowerCase() || 'productgrid';
 
   switch (template) {

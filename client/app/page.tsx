@@ -40,7 +40,7 @@ export default function Home() {
 
         {/* Logo */}
         <div className="container mx-auto px-4 py-4 max-w-6xl">
-          <h1 className="text-4xl font-bold text-orange-600">Agize Pro</h1>
+          <h1 className="text-4xl font-bold text-orange-600">Agiza Pro</h1>
         </div>
 
         {/* Navigation bar */}
@@ -82,7 +82,7 @@ export default function Home() {
               We build long lasting relationship with our merchants and want to ensure all our campaigns reach their target audience effectively. As we expand our platform, we continue to provide seamless social commerce solutions for Kenyan businesses.
             </p>
             <p className="text-gray-700">
-              If you wish to create a campaign with Agize Pro, follow <Link href="/" className="text-blue-600 hover:underline">THIS LINK</Link> and fill in the form. Once we review your application, you will receive an email to proceed with campaign creation. Start engaging with your customers through social media today.
+              If you wish to create a campaign with Agiza Pro, follow <Link href="/" className="text-blue-600 hover:underline">THIS LINK</Link> and fill in the form. Once we review your application, you will receive an email to proceed with campaign creation. Start engaging with your customers through social media today.
             </p>
           </div>
 
@@ -109,7 +109,7 @@ export default function Home() {
         <div className="container mx-auto px-4 py-8 max-w-6xl">
           <div className="text-sm text-gray-600 space-y-1">
             <p>
-              © 2025 Agize Pro. Use of this Web site constitutes acceptance of Agize Pro <Link href="/" className="text-blue-600 hover:underline">Terms and conditions</Link>.
+              © 2025 Agiza Pro. Use of this Web site constitutes acceptance of Agiza Pro <Link href="/" className="text-blue-600 hover:underline">Terms and conditions</Link>.
             </p>
             <p>
               No legal relationship is defined between the two parties by using the terms "Merchant" and "Platform".

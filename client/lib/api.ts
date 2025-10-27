@@ -14,7 +14,6 @@ async function fetchAPI<T>(endpoint: string): Promise<T> {
     headers: {
       'Content-Type': 'application/json',
     },
-    // Add timeout for build-time requests
     next: { revalidate: 60 },
   });
 
@@ -25,13 +24,11 @@ async function fetchAPI<T>(endpoint: string): Promise<T> {
   return response.json();
 }
 
-// Fetch all campaigns (for static generation)
 export async function getAllCampaigns(): Promise<Campaign[]> {
   const data = await fetchAPI<CampaignsListResponse>('/campaigns');
   return data.data;
 }
 
-// Fetch campaign by slug (for dynamic route)
 export async function getCampaignBySlug(
   merchantSlug: string,
   campaignSlug: string
@@ -49,19 +46,16 @@ export async function getCampaignBySlug(
   }
 }
 
-// Track campaign view (analytics)
 export async function trackCampaignView(campaignId: string): Promise<void> {
   try {
     await fetch(`${API_BASE_URL}/campaigns/${campaignId}/view`, {
       method: 'POST',
     });
   } catch (error) {
-    // Silently fail analytics - don't break the page
     console.error('Failed to track view:', error);
   }
 }
 
-// Get price range for meta tags
 export function getPriceRange(campaign: Campaign): string {
   const prices = campaign.products
     .map((p) => p.price || p.campaign_price || 0)

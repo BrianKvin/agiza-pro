@@ -20,7 +20,6 @@ export default function ProductGridTemplate({ campaign }: ProductGridTemplatePro
         color: text_color || '#000000'
       }}
     >
-      {/* Hero Section */}
       <div className="relative w-full h-64 md:h-96">
         {campaign.hero_image && (
           <Image
@@ -39,7 +38,6 @@ export default function ProductGridTemplate({ campaign }: ProductGridTemplatePro
         </div>
       </div>
 
-      {/* Merchant Info */}
       <div className="container mx-auto px-4 py-6 max-w-6xl">
         <div className="flex items-center gap-4 mb-6">
           {merchant.logo_url && (
@@ -59,14 +57,12 @@ export default function ProductGridTemplate({ campaign }: ProductGridTemplatePro
           </div>
         </div>
 
-        {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} primaryColor={primary_color} />
           ))}
         </div>
 
-        {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <WhatsAppButton merchant={merchant} campaign={campaign} />
           <ShareButtons merchant={campaign.merchant_slug} campaign={campaign.slug} />
@@ -82,7 +78,6 @@ function ProductCard({ product, primaryColor }: { product: Product; primaryColor
   
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-      {/* Product Image */}
       <div className="relative aspect-square bg-gray-100">
         {(product.image || product.image_url) && (
           <Image
@@ -107,12 +102,10 @@ function ProductCard({ product, primaryColor }: { product: Product; primaryColor
         )}
       </div>
 
-      {/* Product Info */}
       <div className="p-4">
         <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
         <p className="text-sm text-gray-600 mb-3 line-clamp-2">{product.description}</p>
         
-        {/* Pricing */}
         <div className="flex items-center gap-2 mb-2">
           <span className="text-2xl font-bold" style={{ color: primaryColor || '#000' }}>
             KES {product.price}
@@ -124,7 +117,6 @@ function ProductCard({ product, primaryColor }: { product: Product; primaryColor
           )}
         </div>
 
-        {/* Stock Status */}
         {product.stock !== null && product.stock !== undefined && (
           <p className="text-xs text-gray-500">
             {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}

@@ -11,10 +11,7 @@ export default function WhatsAppButton({ merchant, campaign }: WhatsAppButtonPro
     return null;
   }
 
-  // Format WhatsApp number (remove + if present)
   const phoneNumber = merchant.whatsapp_number.replace('+', '');
-  
-  // Create pre-filled message
   const message = `Hello! I'm interested in "${campaign.title}"`;
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 

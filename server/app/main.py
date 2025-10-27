@@ -6,7 +6,6 @@ from app.models import CampaignResponse, CampaignsListResponse, ViewResponse
 from app.data import get_campaign_by_id, get_campaigns_by_merchant, get_all_campaigns, get_campaign_by_slug, increment_view_count
 import uvicorn
 
-# Create FastAPI app
 app = FastAPI(
     title=settings.api_title,
     description=settings.api_description,
@@ -15,7 +14,6 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
-# Add CORS middleware - allow all origins if cors_origins is empty
 cors_origins = settings.cors_origins if settings.cors_origins else ["*"]
 app.add_middleware(
     CORSMiddleware,
@@ -28,7 +26,6 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-    """Root endpoint with API information"""
     return {
         "message": "Welcome to AgizaPro Campaign API",
         "version": settings.api_version,

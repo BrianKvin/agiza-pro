@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import { getCampaignBySlug, getAllCampaigns, getPriceRange, trackCampaignView } from '@/lib/api';
 import CampaignTemplate from '@/components/CampaignTemplate';
 
-// Generate static params for all campaigns at build time
 export async function generateStaticParams() {
   try {
     const campaigns = await getAllCampaigns();
@@ -13,14 +12,11 @@ export async function generateStaticParams() {
       campaign: campaign.slug,
     }));
   } catch (error) {
-    // If backend is not available during build, return empty array
-    // Pages will be generated on-demand
     console.warn('Could not fetch campaigns during build:', error);
     return [];
   }
 }
 
-// Generate metadata for each campaign (critical for WhatsApp previews)
 export async function generateMetadata({
   params,
 }: {
@@ -39,7 +35,6 @@ export async function generateMetadata({
   const title = campaignData.title;
   const description = campaignData.description;
   const heroImage = campaignData.hero_image || '';
-  // Trim any whitespace/newlines from environment variable
   const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.vercel.app').trim();
   const url = `${siteUrl}/${merchant}/${campaign}`;
 
@@ -67,7 +62,6 @@ export async function generateMetadata({
       description,
       images: [heroImage],
     },
-    // Additional meta tags (non-standard OG tags)
     ...(priceRange && {
       other: {
         'product:price:amount': priceRange,
@@ -76,10 +70,7 @@ export async function generateMetadata({
   };
 }
 
-// Revalidate pages every 60 seconds to pick up data changes
 export const revalidate = 60;
-
-// During build, handle cases where backend might not be available
 export const dynamicParams = true;
 
 export default async function CampaignPage({
@@ -94,7 +85,6 @@ export default async function CampaignPage({
     notFound();
   }
 
-  // Track view in background (non-blocking)
   trackCampaignView(campaignData.id);
 
   return <CampaignTemplate campaign={campaignData} />;

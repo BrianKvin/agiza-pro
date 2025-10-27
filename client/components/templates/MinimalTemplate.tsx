@@ -19,17 +19,13 @@ export default function MinimalTemplate({ campaign }: MinimalTemplateProps) {
         color: text_color || '#000000'
       }}
     >
-      {/* Minimal Hero */}
       <div className="container mx-auto px-4 py-12 max-w-6xl">
-        {/* Title */}
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">{campaign.title}</h1>
         <p className="text-xl text-center mb-12 opacity-80">{campaign.description}</p>
 
-        {/* Featured Product */}
         {featuredProduct && (
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-8">
             <div className="md:flex">
-              {/* Product Image */}
               <div className="relative w-full md:w-1/2 aspect-square">
                 {(featuredProduct.image || featuredProduct.image_url) && (
                   <Image
@@ -42,7 +38,6 @@ export default function MinimalTemplate({ campaign }: MinimalTemplateProps) {
                 )}
               </div>
               
-              {/* Product Info */}
               <div className="p-8 flex flex-col justify-center">
                 <h2 className="text-3xl font-bold mb-4">{featuredProduct.name}</h2>
                 <p className="text-gray-600 mb-6">{featuredProduct.description}</p>
@@ -69,7 +64,6 @@ export default function MinimalTemplate({ campaign }: MinimalTemplateProps) {
           </div>
         )}
 
-        {/* All Products - Compact List */}
         {products.length > 1 && (
           <div className="space-y-4 mb-8">
             <h3 className="text-2xl font-semibold mb-4">All Products</h3>
@@ -97,7 +91,6 @@ export default function MinimalTemplate({ campaign }: MinimalTemplateProps) {
           </div>
         )}
 
-        {/* Merchant Info */}
         <div className="flex items-center justify-center gap-4 mb-8">
           {merchant.logo_url && (
             <Image
@@ -116,7 +109,6 @@ export default function MinimalTemplate({ campaign }: MinimalTemplateProps) {
           </div>
         </div>
 
-        {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <WhatsAppButton merchant={merchant} campaign={campaign} />
           <ShareButtons merchant={campaign.merchant_slug} campaign={campaign.slug} />
