@@ -228,3 +228,23 @@ async def test_hero_image_url(client):
     hero_image = response.json()["data"]["hero_image"]
     assert hero_image is not None
     assert hero_image.startswith("http://") or hero_image.startswith("https://")
+
+
+@pytest.mark.asyncio
+async def test_home_garden_campaign_products(client):
+    """Test that the Home Garden campaign has 3 products with images"""
+    response = await client.get("/campaigns/home-garden/home-makeover-special")
+    assert response.status_code == 200
+    data = response.json()["data"]
+    assert data["template_type"] == "storystyle"
+    
+    products = data["products"]
+    assert len(products) == 3  # Should have 3 products
+    
+    # Verify each product has an image
+    for product in products:
+        assert "id" in product
+        assert "name" in product
+        assert "image" in product
+        assert product["image"] is not None
+        assert product["image"].startswith("https://")

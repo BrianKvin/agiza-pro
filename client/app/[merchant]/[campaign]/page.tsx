@@ -69,6 +69,9 @@ export async function generateMetadata({
   };
 }
 
+// Revalidate pages every 60 seconds to pick up data changes
+export const revalidate = 60;
+
 export default async function CampaignPage({
   params,
 }: {
@@ -86,5 +89,6 @@ export default async function CampaignPage({
 
   return <CampaignTemplate campaign={campaignData} />;
 }
+
 
 

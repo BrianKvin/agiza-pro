@@ -77,3 +77,4 @@ export function getPriceRange(campaign: Campaign): string {
   return `From KES ${min}`;
 }
 
+

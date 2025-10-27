@@ -17,7 +17,7 @@ export default function Home() {
     { 
       merchant: 'home-garden', 
       campaign: 'home-makeover-special',
-      merchantName: 'Home Garden',
+      merchantName: 'Home & Garden',
       campaignName: 'Home Makeover Special'
     },
   ];
