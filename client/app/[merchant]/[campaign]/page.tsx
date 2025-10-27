@@ -5,12 +5,19 @@ import CampaignTemplate from '@/components/CampaignTemplate';
 
 // Generate static params for all campaigns at build time
 export async function generateStaticParams() {
-  const campaigns = await getAllCampaigns();
-  
-  return campaigns.map((campaign) => ({
-    merchant: campaign.merchant_slug,
-    campaign: campaign.slug,
-  }));
+  try {
+    const campaigns = await getAllCampaigns();
+    
+    return campaigns.map((campaign) => ({
+      merchant: campaign.merchant_slug,
+      campaign: campaign.slug,
+    }));
+  } catch (error) {
+    // If backend is not available during build, return empty array
+    // Pages will be generated on-demand
+    console.warn('Could not fetch campaigns during build:', error);
+    return [];
+  }
 }
 
 // Generate metadata for each campaign (critical for WhatsApp previews)
@@ -71,6 +78,9 @@ export async function generateMetadata({
 
 // Revalidate pages every 60 seconds to pick up data changes
 export const revalidate = 60;
+
+// During build, handle cases where backend might not be available
+export const dynamicParams = true;
 
 export default async function CampaignPage({
   params,

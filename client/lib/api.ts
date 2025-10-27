@@ -14,6 +14,8 @@ async function fetchAPI<T>(endpoint: string): Promise<T> {
     headers: {
       'Content-Type': 'application/json',
     },
+    // Add timeout for build-time requests
+    next: { revalidate: 60 },
   });
 
   if (!response.ok) {
@@ -76,5 +78,6 @@ export function getPriceRange(campaign: Campaign): string {
 
   return `From KES ${min}`;
 }
+
 
 
