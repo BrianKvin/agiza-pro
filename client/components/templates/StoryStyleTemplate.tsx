@@ -86,7 +86,7 @@ export default function StoryStyleTemplate({ campaign }: StoryStyleTemplateProps
       </div>
 
       {/* Campaign Info */}
-      <div className="container mx-auto px-4 py-8 max-w-2xl">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
         <h1 className="text-4xl font-bold mb-4 text-center">{campaign.title}</h1>
         <p className="text-xl text-center mb-8 opacity-80">{campaign.description}</p>
 

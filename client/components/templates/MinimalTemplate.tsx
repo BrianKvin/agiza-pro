@@ -20,7 +20,7 @@ export default function MinimalTemplate({ campaign }: MinimalTemplateProps) {
       }}
     >
       {/* Minimal Hero */}
-      <div className="container mx-auto px-4 py-12 max-w-4xl">
+      <div className="container mx-auto px-4 py-12 max-w-6xl">
         {/* Title */}
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">{campaign.title}</h1>
         <p className="text-xl text-center mb-12 opacity-80">{campaign.description}</p>

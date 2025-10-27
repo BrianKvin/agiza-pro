@@ -40,7 +40,7 @@ export default function ProductGridTemplate({ campaign }: ProductGridTemplatePro
       </div>
 
       {/* Merchant Info */}
-      <div className="container mx-auto px-4 py-6">
+      <div className="container mx-auto px-4 py-6 max-w-6xl">
         <div className="flex items-center gap-4 mb-6">
           {merchant.logo_url && (
             <Image
