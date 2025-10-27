@@ -2,8 +2,8 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from app.config import settings
-from app.models import CampaignResponse, CampaignsListResponse
-from app.data import get_campaign_by_id, get_campaigns_by_merchant, get_all_campaigns
+from app.models import CampaignResponse, CampaignsListResponse, ViewResponse
+from app.data import get_campaign_by_id, get_campaigns_by_merchant, get_all_campaigns, get_campaign_by_slug, increment_view_count
 import uvicorn
 
 # Create FastAPI app
@@ -18,7 +18,7 @@ app = FastAPI(
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,
+    allow_origins=settings.get_cors_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -91,21 +91,40 @@ async def get_merchant_campaigns(merchant_id: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.get("/campaigns/{merchant_id}/{campaign_id}", response_model=CampaignResponse)
-async def get_campaign_by_merchant_and_id(merchant_id: str, campaign_id: str):
-    """Get a specific campaign by merchant ID and campaign ID"""
+@app.get("/campaigns/{merchant_slug}/{campaign_slug}", response_model=CampaignResponse)
+async def get_campaign_by_slugs(merchant_slug: str, campaign_slug: str):
+    """Get a specific campaign by merchant slug and campaign slug"""
     try:
-        campaign = get_campaign_by_id(campaign_id)
+        campaign = get_campaign_by_slug(merchant_slug, campaign_slug)
         if not campaign:
             raise HTTPException(status_code=404, detail="Campaign not found")
-        
-        if campaign.merchant_id != merchant_id:
-            raise HTTPException(status_code=404, detail="Campaign not found for this merchant")
         
         return CampaignResponse(
             success=True,
             data=campaign,
             message="Campaign retrieved successfully"
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/campaigns/{campaign_id}/view", response_model=ViewResponse)
+async def track_campaign_view(campaign_id: str):
+    """Increment view count for a campaign (analytics)"""
+    try:
+        campaign = get_campaign_by_id(campaign_id)
+        if not campaign:
+            raise HTTPException(status_code=404, detail="Campaign not found")
+        
+        views = increment_view_count(campaign_id)
+        
+        return ViewResponse(
+            success=True,
+            campaign_id=campaign_id,
+            views=views,
+            message=f"View count incremented. Total views: {views}"
         )
     except HTTPException:
         raise
