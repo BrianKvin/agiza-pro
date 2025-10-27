@@ -28,7 +28,7 @@ export default function Home() {
       <header className="w-full">
         {/* Top bar with Sign In and Register buttons */}
         <div className="bg-white border-b border-gray-200">
-          <div className="container mx-auto px-4 py-2 flex justify-end gap-2">
+          <div className="container mx-auto px-4 py-2 max-w-6xl flex justify-end gap-2">
             <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-1 text-sm font-medium rounded transition-colors">
               Sign In
             </button>
